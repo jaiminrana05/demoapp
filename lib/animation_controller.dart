@@ -11,20 +11,22 @@ class AnimationControllerExample extends StatefulWidget {
 class _AnimationControllerExampleState extends State<AnimationControllerExample>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
-  late Animation color;
-  late Animation size;
+  // late Animation color;
+  // late Animation size;
 
   @override
   void initState() {
     super.initState();
     controller = AnimationController(
+      upperBound: 200.0,
+      lowerBound: 100.0,
       vsync: this,
       duration: const Duration(seconds: 2),
     );
-    color = ColorTween(begin: Colors.blue, end: Colors.red).animate(
-      CurvedAnimation(parent: controller, curve: Curves.fastLinearToSlowEaseIn),
-    );
-    size = Tween<double>(begin: 100.0, end: 200.0).animate(controller);
+    // color = ColorTween(begin: Colors.blue, end: Colors.red).animate(
+    //   CurvedAnimation(parent: controller, curve: Curves.fastLinearToSlowEaseIn),
+    // );
+    // size = Tween<double>(begin: 100.0, end: 200.0).animate(controller);
 
     controller.addListener(() {
       setState(() {});
@@ -45,9 +47,9 @@ class _AnimationControllerExampleState extends State<AnimationControllerExample>
           children: [
             Center(
               child: Container(
-                width: size.value,
-                height: size.value,
-                color: color.value,
+                width: controller.value,
+                height: controller.value,
+                color: Colors.black,
               ),
             ),
           ],
